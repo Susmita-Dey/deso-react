@@ -2,6 +2,8 @@ import "./App.css";
 import Deso from "deso-protocol";
 import { useState } from "react";
 const deso = new Deso();
+console.log(deso);
+
 function App() {
   const [sampleResponse, setSampleResponse] = useState();
   const [loginResponse, setLoginResponse] = useState();
@@ -37,17 +39,18 @@ function App() {
       </button>
       <button
         onClick={async () => {
-          const postResponse = await deso.posts.submitPost({
+          const request = {
             UpdaterPublicKeyBase58Check: deso.identity.getUserKey(),
             BodyObj: {
-              Body: "Hi @DeZoDog, I'm checking out the deso-react app",
+              Body: "Checking out the developer hub",
               VideoURLs: [],
               ImageURLs: [],
             },
-          });
-          setPostResponse(JSON.stringify(postResponse, null, 2));
+          };
+          const response = await deso.posts.submitPost(request);
         }}
       >
+        {" "}
         submit post
       </button>
       <div>
